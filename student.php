@@ -1,5 +1,6 @@
 <?php
 include 'vendor/connect.php';
+include 'component/link.php';
 if (!$_SESSION['user']) {
 	header('Location: /');
 } elseif ($_SESSION['user']['SuperAdmin'] === 0) {
@@ -44,7 +45,7 @@ while ($row = $Students->fetch_assoc()) {
 	$DiplomGrade = $row["DiplomGrade"];
 	$Qualification = $row["Qualification"];
 	$Qualificationdata = $row["Qualificationdata"];
-	
+
 }
 
 ?>
@@ -60,34 +61,7 @@ while ($row = $Students->fetch_assoc()) {
 	<title>Машинобудівний коледж СумДУ</title>
 
 
-	<!-- Mobile Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-	<!-- Web Fonts  -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
-
-	<!-- Vendor CSS -->
-	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
-	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
-	<link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
-
-	<!-- Specific Page Vendor CSS -->
-	<link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
-	<link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
-	<link rel="stylesheet" href="assets/vendor/morris/morris.css" />
-
-	<!-- Theme CSS -->
-	<link rel="stylesheet" href="assets/stylesheets/theme.css" />
-
-	<!-- Skin CSS -->
-	<link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
-
-	<!-- Theme Custom CSS -->
-	<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
-
-	<!-- Head Libs -->
-	<script src="assets/vendor/modernizr/modernizr.js"></script>
 	<style>
 		.ClassForm {
 
@@ -126,7 +100,8 @@ while ($row = $Students->fetch_assoc()) {
 				margin-right: 10px;
 				width: 65px;
 			}
-			.butt{
+
+			.butt {
 				border: none;
 				background: #0088cc;
 				color: white;
@@ -137,89 +112,98 @@ while ($row = $Students->fetch_assoc()) {
 				margin-right: 10px;
 				width: 100px;
 			}
-			
+
 		}
-		
-        #label{
-    display: none;
-    width: 100%; 
-    text-align: center; 
-    font-weight: 600;
-}
-        @media(max-width: 1100px) {
-    .resp-tab thead {
-        display: none;
-    }
-    .resp-tab tr {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-bottom: 30px;
-    }
-    .resp-tab td {
-        margin: 0 -1px -1px 0;
-        padding-top: 35px;
-        position: relative;
-        width: 100%;
-    }
-    .resp-tab td span {
-        display: block;
-    }
-    #idd{
-        background: #0088cc;
-        color: white;
-    }
-    #idd1{
-        background: #e9c646;
-		text-align: center;
-        
-    }
-    #label{
-    display: block;
-    }
-}
+
+		#label {
+			display: none;
+			width: 100%;
+			text-align: center;
+			font-weight: 600;
+		}
+
+		@media(max-width: 1100px) {
+			.resp-tab thead {
+				display: none;
+			}
+
+			.resp-tab tr {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				margin-bottom: 30px;
+			}
+
+			.resp-tab td {
+				margin: 0 -1px -1px 0;
+				padding-top: 35px;
+				position: relative;
+				width: 100%;
+			}
+
+			.resp-tab td span {
+				display: block;
+			}
+
+			#idd {
+				background: #0088cc;
+				color: white;
+			}
+
+			#idd1 {
+				background: #e9c646;
+				text-align: center;
+
+			}
+
+			#label {
+				display: block;
+			}
+		}
 
 
 
-.resp-tab {
-    border-radius: 5px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-}
-.resp-tab th, .resp-tab td {
-    padding: 10px 20px;
-    font-size: 13px;
-    border: none;
-      
-    border: 1px solid #337AB7;
-    vertical-align: top;
-}
-.resp-tab th {
-    color: #FFF;
-    background: #0088cc;
-    font-weight: bold;
-    border: 1px solid #1a4a73;   
-    text-transform: uppercase;   
-    text-align: center;   
-}
+		.resp-tab {
+			border-radius: 5px;
+			font-weight: normal;
+			border: none;
+			border-collapse: collapse;
+			width: 100%;
+			max-width: 100%;
+		}
 
-.resp-tab td span {
-    
-    color: #FFF;
-    display: none;
-    font-size: 11px;
-    font-weight: bold;
-      
-    text-transform: uppercase;       
-    padding: 5px 10px;
-    position: absolute;
-    top: 0;
-    left: 0;   
-}
+		.resp-tab th,
+		.resp-tab td {
+			padding: 10px 20px;
+			font-size: 13px;
+			border: none;
 
+			border: 1px solid #337AB7;
+			vertical-align: top;
+		}
+
+		.resp-tab th {
+			color: #FFF;
+			background: #0088cc;
+			font-weight: bold;
+			border: 1px solid #1a4a73;
+			text-transform: uppercase;
+			text-align: center;
+		}
+
+		.resp-tab td span {
+
+			color: #FFF;
+			display: none;
+			font-size: 11px;
+			font-weight: bold;
+
+			text-transform: uppercase;
+			padding: 5px 10px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 	</style>
 </head>
 
@@ -227,249 +211,14 @@ while ($row = $Students->fetch_assoc()) {
 	<section class="body">
 
 		<!-- start: header -->
-		<header class="header">
-			<div class="logo-container">
-				<a  class="logo">
-					<img src="assets/images/logo.png" height="35" />
-				</a>
-				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
-					<i class="fa fa-bars" aria-label="Toggle sidebar" style="padding-top: 8px;"></i>
-				</div>
-			</div>
+		<?php include 'component/header.php'; ?>
 
-			<!-- start: search & user box -->
-			<div class="header-right">
-
-			<?php $Search = $_GET['q'];?>
-                <form action="Search.php" method="GET" class="search nav-form">
-                    <div class="input-group input-search">
-                        <input type="text" class="form-control" name="q" id="q" placeholder="Пошук">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </form>
-
-
-
-
-
-				<span class="separator"></span>
-
-				<div id="userbox" class="userbox">
-					<a href="#" data-toggle="dropdown">
-						<figure class="profile-picture">
-							<img src="assets/images/!logged-user.jpg" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
-						</figure>
-						<div class="profile-info">
-							<span class="name"><?= $_SESSION['user']['full_name'] ?></span>
-							<span class="role"><?= $adminName ?></span>
-						</div>
-
-						<i class="fa custom-caret"></i>
-					</a>
-
-					<div class="dropdown-menu">
-						<ul class="list-unstyled">
-							<li class="divider"></li>
-							
-
-							<li>
-								<a role="menuitem" tabindex="-1" href="/vendor/logout.php"><i class="fa fa-power-off"></i> Вийти</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<!-- end: search & user box -->
-		</header>
 		<!-- end: header -->
 
 		<div class="inner-wrapper">
 			<!-- start: sidebar -->
-			<aside id="sidebar-left" class="sidebar-left">
+			<?php include 'component/menu.php'; ?>
 
-				<div class="sidebar-header">
-					<div class="sidebar-title">
-						Меню
-					</div>
-					<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-					</div>
-				</div>
-
-				<div class="nano">
-					<div class="nano-content">
-					<nav id="menu" class="nav-main" role="navigation">
-                            <ul class="nav nav-main">
-                                <li class="nav-active">
-                                    <a href="/profileAdmin.php">
-                                        <i class="fa fa-home" aria-hidden="true"></i>
-                                        <span>Головна сторінка</span>
-                                    </a>
-                                </li>
-                                <li class="nav-parent">
-                                    <a>
-                                        <i class="fa fa-align-left" aria-hidden="true"></i>
-                                        <span>Студенти</span>
-                                    </a>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>1 Курс</a>
-                                            <ul class="nav nav-children kurse1">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse1 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 1");
-                                                    while ($row = $Kyrse1->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse1");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>2 Курс</a>
-                                            <ul class="nav nav-children kurse2">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse2 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 2");
-                                                    while ($row = $Kyrse2->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse2");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>3 Курс</a>
-                                            <ul class="nav nav-children kurse3">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse3 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 3");
-                                                    while ($row = $Kyrse3->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse3");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>4 Курс</a>
-                                            <ul class="nav nav-children kurse4">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse4 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 4");
-                                                    while ($row = $Kyrse4->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse4");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="not_translated.php?perem=5">
-                                        <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                        <span>Не переведенні</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="Graduates.php?perem=6">
-                                        <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                        <span>Випускники</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="settings.php">
-                                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                                        <span>Налаштування</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-						<hr class="separator" />
-
-
-
-						<hr class="separator" />
-
-
-					</div>
-
-				</div>
-
-			</aside>
 			<!-- end: sidebar -->
 
 			<section role="main" class="content-body transition-fade" id="swup">
@@ -482,7 +231,7 @@ while ($row = $Students->fetch_assoc()) {
 						$qvery = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` BETWEEN 1 AND 4 ");
 						while ($row = $qvery->fetch_assoc()) {
 
-						?>
+							?>
 							for (let t = 0; t < 5; t++) {
 								let elemp = document.querySelector(".re");
 								let a = document.createElement('a');
@@ -491,7 +240,7 @@ while ($row = $Students->fetch_assoc()) {
 								elemp.append(a);
 								break;
 							}
-						<?php
+									<?php
 						}
 						?>
 					</script>
@@ -501,12 +250,16 @@ while ($row = $Students->fetch_assoc()) {
 				<section class="panel">
 					<header class="panel-heading" style="padding: 0;">
 						<form action="../word.php" method="post">
-							<input type="hidden" name="Students" value="<?=$id_Students?>">
-							<button style="height: 40px;width: 100%;background: #0088cc;border: none;color: white;font-size: 20px;cursor: pointer;" >Завантажити особисту справу</button>
+							<input type="hidden" name="Students" value="<?= $id_Students ?>">
+							<button
+								style="height: 40px;width: 100%;background: #0088cc;border: none;color: white;font-size: 20px;cursor: pointer;">Завантажити
+								особисту справу</button>
 						</form>
 					</header>
 					<div class="panel-body">
-						<div style="text-align: center;"><label style="font-size: 18px;font-weight: 600;padding-bottom: 2%;">Індивідуальний навчальний план студента</label><br> </div>
+						<div style="text-align: center;"><label
+								style="font-size: 18px;font-weight: 600;padding-bottom: 2%;">Індивідуальний навчальний
+								план студента</label><br> </div>
 
 						<div class="form-group">
 							<label class="col-md-3 control-label">ПІБ:</label>
@@ -521,32 +274,34 @@ while ($row = $Students->fetch_assoc()) {
 									<span class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</span>
-									<input type="date" class="form-control" value="<?= $birthdata ?>" id="birthdata" >
+									<input type="date" class="form-control" value="<?= $birthdata ?>" id="birthdata">
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Місце народження:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" value="<?= $place_of_birth ?>" id="place_of_birth">
+								<input type="text" class="form-control" value="<?= $place_of_birth ?>"
+									id="place_of_birth">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Адрес місця проживання:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" value="<?= $adress ?>" id="adress" placeholder="Поштовий індекс, область, район,назва населенного пункту,вулиця,№ будинку,№ квартири,номер телефону">
+								<input type="text" class="form-control" value="<?= $adress ?>" id="adress"
+									placeholder="Поштовий індекс, область, район,назва населенного пункту,вулиця,№ будинку,№ квартири,номер телефону">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Зарахований(на) наказом від:</label>
-							<div class="col-md-8">	
-								<input type="text" class="form-control" value="<?= $reckoned ?>" id="reckoned" >
+							<div class="col-md-8">
+								<input type="text" class="form-control" value="<?= $reckoned ?>" id="reckoned">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="inputDefault">Група:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" value="<?= $groups ?>" id="groups" >
+								<input type="text" class="form-control" value="<?= $groups ?>" id="groups">
 							</div>
 						</div>
 
@@ -557,7 +312,8 @@ while ($row = $Students->fetch_assoc()) {
 									<span class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</span>
-									<input type="date" class="form-control" value="<?= $Start_learning ?>" id="Start_learning">
+									<input type="date" class="form-control" value="<?= $Start_learning ?>"
+										id="Start_learning">
 								</div>
 							</div>
 						</div>
@@ -580,14 +336,17 @@ while ($row = $Students->fetch_assoc()) {
 							<div class="col-md-8">
 								<div class="input-group">
 
-									<input type="text" class="form-control" value="<?= $Form_of_study ?>" id="Form_of_study">
+									<input type="text" class="form-control" value="<?= $Form_of_study ?>"
+										id="Form_of_study">
 								</div>
 							</div>
 						</div>
 
 
 
-						<div style="text-align: center;"><label style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Загальні дані</label><br> </div>
+						<div style="text-align: center;"><label
+								style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Загальні
+								дані</label><br> </div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Відділення:</label>
 							<div class="col-md-8">
@@ -605,7 +364,8 @@ while ($row = $Students->fetch_assoc()) {
 						<div class="form-group">
 							<label class="col-md-3 control-label">Найменування галузі знань:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" value="<?= $Branch_of_knowledge ?>" id="Branch_of_knowledge">
+								<input type="text" class="form-control" value="<?= $Branch_of_knowledge ?>"
+									id="Branch_of_knowledge">
 							</div>
 						</div>
 
@@ -622,19 +382,24 @@ while ($row = $Students->fetch_assoc()) {
 								<input type="text" class="form-control" value="<?= $program ?>" id="program">
 							</div>
 						</div>
-						<div style="text-align: center;"><label style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Підсумкові оцінки</label><br> </div>
+						<div style="text-align: center;"><label
+								style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Підсумкові
+								оцінки</label><br> </div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Усього:</label>
 							<div class="col-md-8" style="display: flex;">
-								<input style="width: 60%;" type="text" class="form-control" id="ratingall" value="<?= $ratingall ?>">
-								<button onclick="sumer()" style="width: 40%; height: 33px;padding-top: 5px;" class="ButKurse butt">Розрахувати</button>
-					
+								<input style="width: 60%;" type="text" class="form-control" id="ratingall"
+									value="<?= $ratingall ?>">
+								<button onclick="sumer()" style="width: 40%; height: 33px;padding-top: 5px;"
+									class="ButKurse butt">Розрахувати</button>
+
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Відмінно:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" id="RatingExcellent" value="<?= $RatingExcellent ?>" >
+								<input type="text" class="form-control" id="RatingExcellent"
+									value="<?= $RatingExcellent ?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -646,11 +411,14 @@ while ($row = $Students->fetch_assoc()) {
 						<div class="form-group">
 							<label class="col-md-3 control-label">Задовільно:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" id="RatingSatisfactory" value="<?= $RatingSatisfactory ?>">
+								<input type="text" class="form-control" id="RatingSatisfactory"
+									value="<?= $RatingSatisfactory ?>">
 							</div>
 						</div>
-						
-						<div style="text-align: center;"><label style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Дипломний проєкт</label><br> </div>
+
+						<div style="text-align: center;"><label
+								style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Дипломний
+								проєкт</label><br> </div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Тема:</label>
 							<div class="col-md-8">
@@ -664,17 +432,21 @@ while ($row = $Students->fetch_assoc()) {
 							</div>
 						</div>
 
-						<div style="text-align: center;"><label style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Кваліфікація</label><br> </div>
+						<div style="text-align: center;"><label
+								style="font-size: 18px;font-weight: 600;padding-bottom: 2%; padding-top: 2%;">Кваліфікація</label><br>
+						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Присвоєна кваліфікація:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" id="Qualification" value="<?= $Qualification ?>">
+								<input type="text" class="form-control" id="Qualification"
+									value="<?= $Qualification ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">Присвоєно від:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" id="Qualificationdata" value="<?= $Qualificationdata ?>" placeholder='"___"___________ 20___ року №___'>
+								<input type="text" class="form-control" id="Qualificationdata"
+									value="<?= $Qualificationdata ?>" placeholder='"___"___________ 20___ року №___'>
 							</div>
 						</div>
 					</div>
@@ -702,12 +474,12 @@ while ($row = $Students->fetch_assoc()) {
 							</thead>
 							<tbody id="Table">
 								<script>
-									<?php
-									$Student1 = $connect->query("SELECT * FROM `orders` WHERE `id_Students`=$id_Students ORDER BY `id_Orders` ASC");
+										<?php
+										$Student1 = $connect->query("SELECT * FROM `orders` WHERE `id_Students`=$id_Students ORDER BY `id_Orders` ASC");
 
-									while ($row = $Student1->fetch_assoc()) {
+										while ($row = $Student1->fetch_assoc()) {
 
-									?>
+											?>
 										for (let h = 0; h < 1; h++) {
 											let elemp = document.getElementById("Table");
 											let tr = document.createElement('tr');
@@ -716,22 +488,24 @@ while ($row = $Students->fetch_assoc()) {
 											break;
 										}
 
-									<?php
+												<?php
 
-									}
-									?>
+										}
+										?>
 								</script>
 
 							</tbody>
 						</table>
 						<div style="text-align: end;  margin-top: 6px;">
 
-							<button class="ButKurse butt" onclick="buton3()" id="butt3">Змінити <i class="fa fa-pencil"></i></button>
+							<button class="ButKurse butt" onclick="buton3()" id="butt3">Змінити <i
+									class="fa fa-pencil"></i></button>
 							<br>
-							<button class="ButKurse butt" onclick="buton1()" id="butt1">Додати <i class="fa fa-plus"></i></button>
+							<button class="ButKurse butt" onclick="buton1()" id="butt1">Додати <i
+									class="fa fa-plus"></i></button>
 						</div>
 						<script>
-							let i = 1;
+								let i = 1;
 
 							function buton1() {
 								document.getElementById("butt1").style.visibility = "hidden";
@@ -754,7 +528,7 @@ while ($row = $Students->fetch_assoc()) {
 								let input2 = document.getElementById("input2").value;
 								let input3 = document.getElementById("input3").value;
 								let student = <?= $id_Students ?>;
-								
+
 								if (input3 == "" && input2 == "" && input1 == "") {
 									alert("Не все поля заповнено")
 								} else {
@@ -768,10 +542,10 @@ while ($row = $Students->fetch_assoc()) {
 											student: student
 
 										},
-										success: function() {
+										success: function () {
 
 										},
-										error: function() {
+										error: function () {
 											alert("Нет");
 										}
 									});
@@ -815,7 +589,7 @@ while ($row = $Students->fetch_assoc()) {
 									$num = 1;
 									while ($row = $Student1->fetch_assoc()) {
 
-									?>
+										?>
 										for (let h = 0; h < 1; h++) {
 											let elemp = document.getElementById("Table5");
 											let tr = document.createElement('tr');
@@ -823,8 +597,8 @@ while ($row = $Students->fetch_assoc()) {
 											elemp.append(tr);
 											break;
 										}
-									<?php
-										$num++;
+												<?php
+												$num++;
 									}
 									?>
 								</script>
@@ -832,23 +606,25 @@ while ($row = $Students->fetch_assoc()) {
 							</tbody>
 						</table>
 						<div style="text-align: end;  margin-top: 6px;">
-							<button class="ButKurse butt" onclick="buton333()" id="buton333">Змінити <i class="fa fa-pencil"></i></button>
+							<button class="ButKurse butt" onclick="buton333()" id="buton333">Змінити <i
+									class="fa fa-pencil"></i></button>
 							<br>
-							<button class="ButKurse butt" onclick="buton111()" id="buton111">Додати <i class="fa fa-plus"></i></button>
+							<button class="ButKurse butt" onclick="buton111()" id="buton111">Додати <i
+									class="fa fa-plus"></i></button>
 						</div>
 						<script>
-							function buton111() {
-								document.getElementById("buton111").style.visibility = "hidden";
-								document.getElementById("buton333").style.visibility = "visible";
-								for (let h = 0; h < 1; h++) {
-									let elemp = document.getElementById("Table5");
+								function buton111() {
+									document.getElementById("buton111").style.visibility = "hidden";
+									document.getElementById("buton333").style.visibility = "visible";
+									for (let h = 0; h < 1; h++) {
+										let elemp = document.getElementById("Table5");
 
-									let tr = document.createElement('tr');
-									tr.innerHTML = '<td style="text-align: center; "> <input type="text" class="form-control" style="text-align: center;"   ></td><td style="text-align: center;"><label id="label" >Вид практики</label><input type="text" class="form-control" style="text-align: center;" id="int2"></td><td style="text-align: center;"><label id="label" >Курс</label><input type="text" class="form-control" style="text-align: center;"id="int3"></td><td style="text-align: center;"><label id="label" >Семестр</label><input type="text" class="form-control" style="text-align: center;"id="int4"></td><td style="text-align: center; "><label id="label" >Дата початку</label><input type="text" class="form-control" style="text-align: center;" id="int5"></td><td style="text-align: center;"><label id="label" >Дата кінця</label><input type="text" class="form-control" style="text-align: center;"id="int6"></td><td style="text-align: center;"><label id="label" >Годин</label><input type="text" class="form-control" style="text-align: center;" id="int7"></td><td style="text-align: center; "><label id="label" >ПІБ викладача</label><input type="text" class="form-control" style="text-align: center;"id="int8"></td><td style="text-align: center;"><label id="label" >Підсумкова оцінка</label><input type="text" class="form-control" style="text-align: center;"id="int9"></td><td style="text-align: center;"><label id="label" >Дата</label><input type="text" class="form-control" style="text-align: center;"id="int10"></td>';
-									elemp.append(tr);
-									break;
+										let tr = document.createElement('tr');
+										tr.innerHTML = '<td style="text-align: center; "> <input type="text" class="form-control" style="text-align: center;"   ></td><td style="text-align: center;"><label id="label" >Вид практики</label><input type="text" class="form-control" style="text-align: center;" id="int2"></td><td style="text-align: center;"><label id="label" >Курс</label><input type="text" class="form-control" style="text-align: center;"id="int3"></td><td style="text-align: center;"><label id="label" >Семестр</label><input type="text" class="form-control" style="text-align: center;"id="int4"></td><td style="text-align: center; "><label id="label" >Дата початку</label><input type="text" class="form-control" style="text-align: center;" id="int5"></td><td style="text-align: center;"><label id="label" >Дата кінця</label><input type="text" class="form-control" style="text-align: center;"id="int6"></td><td style="text-align: center;"><label id="label" >Годин</label><input type="text" class="form-control" style="text-align: center;" id="int7"></td><td style="text-align: center; "><label id="label" >ПІБ викладача</label><input type="text" class="form-control" style="text-align: center;"id="int8"></td><td style="text-align: center;"><label id="label" >Підсумкова оцінка</label><input type="text" class="form-control" style="text-align: center;"id="int9"></td><td style="text-align: center;"><label id="label" >Дата</label><input type="text" class="form-control" style="text-align: center;"id="int10"></td>';
+										elemp.append(tr);
+										break;
+									}
 								}
-							}
 
 							function buton333() {
 								let fun = 9;
@@ -883,11 +659,11 @@ while ($row = $Students->fetch_assoc()) {
 											input10: input10,
 											student: student
 										},
-										success: function() {
+										success: function () {
 
 											alert("Дані були успішно записані");
 										},
-										error: function() {
+										error: function () {
 											alert("Нет");
 										}
 									});
@@ -930,7 +706,7 @@ while ($row = $Students->fetch_assoc()) {
 									$num = 1;
 									while ($row = $Student1->fetch_assoc()) {
 
-									?>
+										?>
 										for (let h = 0; h < 1; h++) {
 											let elemp = document.getElementById("Table4");
 											let tr = document.createElement('tr');
@@ -938,31 +714,33 @@ while ($row = $Students->fetch_assoc()) {
 											elemp.append(tr);
 											break;
 										}
-									<?php
-										$num++;
+												<?php
+												$num++;
 									}
 									?>
 								</script>
 							</tbody>
 						</table>
 						<div style="text-align: end;  margin-top: 6px;">
-							<button class="ButKurse butt" onclick="buton33()" id="buton33">Змінити <i class="fa fa-pencil"></i></button>
+							<button class="ButKurse butt" onclick="buton33()" id="buton33">Змінити <i
+									class="fa fa-pencil"></i></button>
 							<br>
-							<button class="ButKurse butt" onclick="buton11()" id="buton11">Додати <i class="fa fa-plus"></i></button>
+							<button class="ButKurse butt" onclick="buton11()" id="buton11">Додати <i
+									class="fa fa-plus"></i></button>
 						</div>
 						<script>
-							function buton11() {
-								document.getElementById("buton11").style.visibility = "hidden";
-								document.getElementById("buton33").style.visibility = "visible";
-								for (let h = 0; h < 1; h++) {
-									let elemp = document.getElementById("Table4");
+								function buton11() {
+									document.getElementById("buton11").style.visibility = "hidden";
+									document.getElementById("buton33").style.visibility = "visible";
+									for (let h = 0; h < 1; h++) {
+										let elemp = document.getElementById("Table4");
 
-									let tr = document.createElement('tr');
-									tr.innerHTML = '<td style="text-align: center; "><label id="label" >№</label> <input type="text" class="form-control" style="text-align: center;"   id="inputt1"></td><td ><label id="label" >Назва навчальної дисципліни</label><input  type="text" class="form-control" style="text-align: center; "   id="inputt2"> </td><td class="actions" style="text-align: center;" ><label id="label" >Оцінка</label> <input type="text" class="form-control" style="text-align: center;"   id="inputt3"></td>';
-									elemp.append(tr);
-									break;
+										let tr = document.createElement('tr');
+										tr.innerHTML = '<td style="text-align: center; "><label id="label" >№</label> <input type="text" class="form-control" style="text-align: center;"   id="inputt1"></td><td ><label id="label" >Назва навчальної дисципліни</label><input  type="text" class="form-control" style="text-align: center; "   id="inputt2"> </td><td class="actions" style="text-align: center;" ><label id="label" >Оцінка</label> <input type="text" class="form-control" style="text-align: center;"   id="inputt3"></td>';
+										elemp.append(tr);
+										break;
+									}
 								}
-							}
 
 							function buton33() {
 								let inputt2 = document.getElementById("inputt2").value;
@@ -984,11 +762,11 @@ while ($row = $Students->fetch_assoc()) {
 											fun: fun
 
 										},
-										success: function() {
+										success: function () {
 											alert("Дані успішно записані");
 
 										},
-										error: function() {
+										error: function () {
 											alert("Нет");
 										}
 									});
@@ -1008,7 +786,7 @@ while ($row = $Students->fetch_assoc()) {
 					</div>
 				</section>
 				<div style="text-align: end;  margin-top: 6px;">
-					<button class="ButKurse butt"  onclick="allbut()">Зберегти</button>
+					<button class="ButKurse butt" onclick="allbut()">Зберегти</button>
 				</div>
 				<!-- start: page -->
 
@@ -1020,35 +798,35 @@ while ($row = $Students->fetch_assoc()) {
 	</section>
 
 	<script>
-		window.onload = function() {
+		window.onload = function () {
 			document.getElementById("butt3").style.visibility = "hidden";
 			document.getElementById("buton33").style.visibility = "hidden";
 			document.getElementById("buton333").style.visibility = "hidden";
 			<?php
 			$Student1 = $connect->query("SELECT * FROM `orders` WHERE `id_Students`=$id_Students ORDER BY `id_Orders` ASC");
 			while ($row = $Student1->fetch_assoc()) {
-			?>
+				?>
 				document.getElementById("save<?= $row["id_Orders"] ?>").style.visibility = "hidden";
-			<?php
+				<?php
 			}
 			?>
 			<?php
 			$Students1 = $connect->query("SELECT * FROM `certification` WHERE `id_Students`=$id_Students");
 			while ($row = $Students1->fetch_assoc()) {
-			?>
+				?>
 				document.getElementById("savecertification<?= $row["id_certification"] ?>").style.visibility = "hidden";
-			<?php
+				<?php
 			}
 			?>
 			<?php
-									$Studentss1 = $connect->query("SELECT * FROM `practice` WHERE `id_Students`=$id_Students");
-									
-									while ($row = $Studentss1->fetch_assoc()) {
+			$Studentss1 = $connect->query("SELECT * FROM `practice` WHERE `id_Students`=$id_Students");
 
-									?>
-			document.getElementById("savepractice" + <?= $row["id_practice"] ?>).style.visibility = "hidden";
-			<?php
-									}
+			while ($row = $Studentss1->fetch_assoc()) {
+
+				?>
+				document.getElementById("savepractice" + <?= $row["id_practice"] ?>).style.visibility = "hidden";
+				<?php
+			}
 			?>
 
 
@@ -1076,10 +854,10 @@ while ($row = $Students->fetch_assoc()) {
 						id: id,
 						fun: fun
 					},
-					success: function() {
+					success: function () {
 						alert("Запис був успішно видаленний");
 					},
-					error: function() {
+					error: function () {
 						alert("Помилка");
 					}
 				});
@@ -1103,10 +881,10 @@ while ($row = $Students->fetch_assoc()) {
 					data: data,
 					text: text
 				},
-				success: function() {
+				success: function () {
 					alert("Запис був успішно оновлено");
 				},
-				error: function() {
+				error: function () {
 					alert("Помилка");
 				}
 			});
@@ -1134,10 +912,10 @@ while ($row = $Students->fetch_assoc()) {
 						id: id,
 						fun: fun
 					},
-					success: function() {
+					success: function () {
 						alert("Запис був успішно видаленний");
 					},
-					error: function() {
+					error: function () {
 						alert("Помилка");
 					}
 				});
@@ -1160,10 +938,10 @@ while ($row = $Students->fetch_assoc()) {
 					name: name,
 					rating: rating
 				},
-				success: function() {
+				success: function () {
 					alert("Запис був успішно оновлено");
 				},
-				error: function() {
+				error: function () {
 					alert("Помилка");
 				}
 			});
@@ -1198,10 +976,10 @@ while ($row = $Students->fetch_assoc()) {
 						id: id,
 						fun: fun
 					},
-					success: function() {
+					success: function () {
 						alert("Запис був успішно видаленний");
 					},
-					error: function() {
+					error: function () {
 						alert("Помилка");
 					}
 				});
@@ -1212,7 +990,7 @@ while ($row = $Students->fetch_assoc()) {
 		function savepractice(id) {
 
 			let fun = 8;
-			let student = <?= $id_Students?>;
+			let student = <?= $id_Students ?>;
 			let namee = document.getElementById("namee" + id).value;
 			let id_semestr = document.getElementById("id_semestr" + id).value;
 			let id_kurse = document.getElementById("id_kurse" + id).value;
@@ -1237,35 +1015,33 @@ while ($row = $Students->fetch_assoc()) {
 					nameteacher: nameteacher,
 					ratingg: ratingg,
 					dateee: dateee,
-					student:student
+					student: student
 				},
-				success: function() {
+				success: function () {
 					alert("Запис був успішно оновлено");
 				},
-				error: function() {
+				error: function () {
 					alert("Помилка");
 				}
 			});
 			window.location.reload();
 		}
-		function sumer(){
+		function sumer() {
 			let rating0 = document.getElementById("ratingall");
 			let Rating1 = Number(document.getElementById("RatingExcellent").value);
 			let Rating2 = Number(document.getElementById("RatingGood").value);
 			let Rating3 = Number(document.getElementById("RatingSatisfactory").value);
-			if(Rating1 == "" && Rating2 == "" && Rating3 == "")
-			{
+			if (Rating1 == "" && Rating2 == "" && Rating3 == "") {
 				alert("Не всі поля заповнено");
 			}
-			else
-			{
-				let sum = Rating1 + Rating2 +Rating3;
+			else {
+				let sum = Rating1 + Rating2 + Rating3;
 				rating0.value = sum;
 			}
-			
+
 		}
-		function allbut(){
-			let student = <?= $id_Students?>;
+		function allbut() {
+			let student = <?= $id_Students ?>;
 			let fun = 10;
 			let fullname = document.getElementById("fullname").value;
 			let birthdata = document.getElementById("birthdata").value;
@@ -1289,7 +1065,7 @@ while ($row = $Students->fetch_assoc()) {
 			let DiplomGrade = document.getElementById("DiplomGrade").value;
 			let Qualification = document.getElementById("Qualification").value;
 			let Qualificationdata = document.getElementById("Qualificationdata").value;
-			
+
 			jQuery.ajax({
 				url: "vendor/but1.php",
 				type: "POST",
@@ -1315,14 +1091,14 @@ while ($row = $Students->fetch_assoc()) {
 					RatingSatisfactory: RatingSatisfactory,
 					DiplomTopic: DiplomTopic,
 					DiplomGrade: DiplomGrade,
-					Qualification:Qualification,
-					Qualificationdata:Qualificationdata,
-					student:student
+					Qualification: Qualification,
+					Qualificationdata: Qualificationdata,
+					student: student
 				},
-				success: function() {
+				success: function () {
 					alert("Запис був успішно оновлено");
 				},
-				error: function() {
+				error: function () {
 					alert("Помилка");
 				}
 			});

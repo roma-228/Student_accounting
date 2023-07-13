@@ -1,5 +1,6 @@
 <?php
 include 'vendor/connect.php';
+include 'component/link.php';
 
 if (!$_SESSION['user']) {
     header('Location: index.php');
@@ -7,14 +8,10 @@ if (!$_SESSION['user']) {
 if ($_SESSION['user']['SuperAdmin'] != 0) {
     $adminName = "Суперадміністратор";
 
-} else  {
+} else {
     $adminName = "Адміністратор";
 
 }
-
-
-
-
 
 ?>
 <!doctype html>
@@ -22,13 +19,8 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
 
 <head>
 
-    <!-- Basic -->
-    <meta charset="UTF-8">
-
     <title>Машинобудівний коледж СумДУ</title>
-    <?php include 'vendor/component.php'; ?>
 
-    
     <style>
         .ClassForm {
             padding-left: 30%;
@@ -45,262 +37,24 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
 </head>
 
 <body>
-    <section class="body"  >
+    <section class="body">
 
         <!-- start: header -->
-        <header class="header">
-            <div class="logo-container">
-                <a  class="logo">
-                    <img src="assets/images/logo.png" height="35" />
-                </a>
-                <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
-                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                </div>
-            </div>
-
-            <!-- start: search & user box -->
-            <div class="header-right">
-
-            <?php $Search = $_GET['q'];?>
-                <form action="Search.php" method="GET" class="search nav-form">
-                    <div class="input-group input-search">
-                        <input type="text" class="form-control" name="q" id="q" placeholder="Пошук">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </form>
-
-
-
-
-
-                <span class="separator"></span>
-
-                <div id="userbox" class="userbox">
-                    <a href="#" data-toggle="dropdown">
-                        <figure class="profile-picture">
-                            <img src="assets/images/!logged-user.jpg" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
-                        </figure>
-                        <div class="profile-info">
-                            <span class="name"><?= $_SESSION['user']['full_name'] ?></span>
-                            <span class="role"><?= $adminName ?></span>
-                        </div>
-
-                        <i class="fa custom-caret"></i>
-                    </a>
-
-                    <div class="dropdown-menu">
-                        <ul class="list-unstyled">
-                            <li class="divider"></li>
-                           
-
-                            <li>
-                                <a role="menuitem" tabindex="-1" href="vendor/logout.php"><i class="fa fa-power-off"></i> Вийти</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- end: search & user box -->
-        </header>
+        <?php include 'component/header.php'; ?>
         <!-- end: header -->
 
         <div class="inner-wrapper">
+
             <!-- start: sidebar -->
-            <aside id="sidebar-left" class="sidebar-left">
-
-                <div class="sidebar-header">
-                    <div class="sidebar-title">
-                        Меню
-                    </div>
-                    <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-                    </div>
-                </div>
-
-                <div class="nano">
-                    <div class="nano-content">
-                    <nav id="menu" class="nav-main" role="navigation">
-                            <ul class="nav nav-main">
-                                <li class="nav-active">
-                                    <a href="/profileAdmin.php">
-                                        <i class="fa fa-home" aria-hidden="true"></i>
-                                        <span>Головна сторінка</span>
-                                    </a>
-                                </li>
-                                <li class="nav-parent">
-                                    <a>
-                                        <i class="fa fa-align-left" aria-hidden="true"></i>
-                                        <span>Студенти</span>
-                                    </a>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>1 Курс</a>
-                                            <ul class="nav nav-children kurse1">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse1 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 1");
-                                                    while ($row = $Kyrse1->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse1");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>2 Курс</a>
-                                            <ul class="nav nav-children kurse2">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse2 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 2");
-                                                    while ($row = $Kyrse2->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse2");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>3 Курс</a>
-                                            <ul class="nav nav-children kurse3">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse3 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 3");
-                                                    while ($row = $Kyrse3->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse3");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-children">
-                                        <li class="nav-parent">
-                                            <a>4 Курс</a>
-                                            <ul class="nav nav-children kurse4">
-                                                <script>
-                                                    <?php
-                                                    //Четвертий курс
-                                                    $Kyrse4 = $connect->query("SELECT * FROM `groups` WHERE `id_kurse` = 4");
-                                                    while ($row = $Kyrse4->fetch_assoc()) {
-                                                    ?>
-                                                        for (let h = 0; h < 1; h++) {
-                                                            let elemp = document.querySelector(".kurse4");
-                                                            let li = document.createElement('li');
-                                                            let form = document.createElement('form');
-                                                            form.classList.add('ClassForm');
-                                                            form.classList.add('ClassForm:hover');
-                                                            form.innerHTML = "<button style='border:none; background: none; color: fff; width: 100%;'><p ><?= $row["name"] ?></p> <input type='hidden' name='perem' value='<?= $row["id_ group"] ?>'></button>";
-                                                            form.setAttribute("method", "get");
-                                                            form.setAttribute("action", "/groupstudent.php");
-
-                                                            li.append(form);
-                                                            elemp.append(li);
-                                                            break;
-                                                        }
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </script>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="not_translated.php?perem=5">
-                                        <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                        <span>Не переведенні</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="Graduates.php?perem=6">
-                                        <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                        <span>Випускники</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="settings.php">
-                                        <i class="fa fa-cogs" aria-hidden="true"></i>
-                                        <span>Налаштування</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <hr class="separator" />
-
-
-
-                        <hr class="separator" />
-
-
-                    </div>
-
-                </div>
-
-            </aside>
+            <?php include 'component/menu.php'; ?>
             <!-- end: sidebar -->
 
             <section role="main" class="content-body transition-fade" id="swup">
                 <header class="page-header">
                     <h2>Машинобудівний коледж СумДУ</h2>
-
-
                 </header>
-                <div class="row kursePanel" >
-                <script>
+                <div class="row kursePanel">
+                    <script>
                         <?php
                         //Блок першого курсу
                         $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 1");
@@ -309,7 +63,7 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                             while ($roww = $KyrsePanel2->fetch_assoc()) {
                                 $numer = $roww["count"];
                             }
-                        ?>
+                            ?>
                             for (let h = 0; h < 5; h++) {
                                 let elemp = document.querySelector(".kursePanel");
                                 let div = document.createElement('div');
@@ -326,15 +80,15 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                         ?>
                     </script>
                     <script>
-                        <?php
-                        //Блок Другого курсу
-                        $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 2");
-                        while ($row = $KyrsePanel1->fetch_assoc()) {
-                            $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=2 and t.`id_ group`=tn.`id_ group`");
-                            while ($roww = $KyrsePanel2->fetch_assoc()) {
-                                $numer = $roww["count"];
-                            }
-                        ?>
+                            <?php
+                            //Блок Другого курсу
+                            $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 2");
+                            while ($row = $KyrsePanel1->fetch_assoc()) {
+                                $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=2 and t.`id_ group`=tn.`id_ group`");
+                                while ($roww = $KyrsePanel2->fetch_assoc()) {
+                                    $numer = $roww["count"];
+                                }
+                                ?>
                             for (let h = 0; h < 5; h++) {
                                 let elemp = document.querySelector(".kursePanel");
                                 let div = document.createElement('div');
@@ -346,20 +100,20 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                                 elemp.append(form);
                                 break;
                             }
-                        <?php
-                        }
-                        ?>
+                                        <?php
+                            }
+                            ?>
                     </script>
                     <script>
-                        <?php
-                        //Блок третього курсу
-                        $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 3");
-                        while ($row = $KyrsePanel1->fetch_assoc()) {
-                            $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=3 and t.`id_ group`=tn.`id_ group`");
-                            while ($roww = $KyrsePanel2->fetch_assoc()) {
-                                $numer = $roww["count"];
-                            }
-                        ?>
+                            <?php
+                            //Блок третього курсу
+                            $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 3");
+                            while ($row = $KyrsePanel1->fetch_assoc()) {
+                                $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=3 and t.`id_ group`=tn.`id_ group`");
+                                while ($roww = $KyrsePanel2->fetch_assoc()) {
+                                    $numer = $roww["count"];
+                                }
+                                ?>
                             for (let h = 0; h < 5; h++) {
                                 let elemp = document.querySelector(".kursePanel");
                                 let div = document.createElement('div');
@@ -371,20 +125,20 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                                 elemp.append(form);
                                 break;
                             }
-                        <?php
-                        }
-                        ?>
+                                        <?php
+                            }
+                            ?>
                     </script>
                     <script>
-                        <?php
-                        //Блок четвертого курсу
-                        $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 4");
-                        while ($row = $KyrsePanel1->fetch_assoc()) {
-                            $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=4 and t.`id_ group`=tn.`id_ group`");
-                            while ($roww = $KyrsePanel2->fetch_assoc()) {
-                                $numer = $roww["count"];
-                            }
-                        ?>
+                            <?php
+                            //Блок четвертого курсу
+                            $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 4");
+                            while ($row = $KyrsePanel1->fetch_assoc()) {
+                                $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=4 and t.`id_ group`=tn.`id_ group`");
+                                while ($roww = $KyrsePanel2->fetch_assoc()) {
+                                    $numer = $roww["count"];
+                                }
+                                ?>
                             for (let h = 0; h < 5; h++) {
                                 let elemp = document.querySelector(".kursePanel");
                                 let div = document.createElement('div');
@@ -396,20 +150,20 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                                 elemp.append(form);
                                 break;
                             }
-                        <?php
-                        }
-                        ?>
+                                        <?php
+                            }
+                            ?>
                     </script>
                     <script>
-                        <?php
-                        //Не переведенні
-                        $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 5");
-                        while ($row = $KyrsePanel1->fetch_assoc()) {
-                            $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=5 and t.`id_ group`=tn.`id_ group`");
-                            while ($roww = $KyrsePanel2->fetch_assoc()) {
-                                $numer = $roww["count"];
-                            }
-                        ?>
+                            <?php
+                            //Не переведенні
+                            $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 5");
+                            while ($row = $KyrsePanel1->fetch_assoc()) {
+                                $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=5 and t.`id_ group`=tn.`id_ group`");
+                                while ($roww = $KyrsePanel2->fetch_assoc()) {
+                                    $numer = $roww["count"];
+                                }
+                                ?>
                             for (let h = 0; h < 5; h++) {
                                 let elemp = document.querySelector(".kursePanel");
                                 let div = document.createElement('div');
@@ -421,21 +175,21 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                                 elemp.append(form);
                                 break;
                             }
-                        <?php
-                        }
-                        ?>
+                                        <?php
+                            }
+                            ?>
                     </script>
                     <script>
-                        <?php
-                        //Випускники
-                        $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 6");
-                        while ($row = $KyrsePanel1->fetch_assoc()) {
-                            $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=6 and t.`id_ group`=tn.`id_ group`");
-                            while ($roww = $KyrsePanel2->fetch_assoc()) {
-                                $numer = $roww["count"];
-                            }
+                            <?php
+                            //Випускники
+                            $KyrsePanel1 = $connect->query("SELECT * FROM `kurse` WHERE `id_kurse` = 6");
+                            while ($row = $KyrsePanel1->fetch_assoc()) {
+                                $KyrsePanel2 = $connect->query("SELECT COUNT(tn.`fullname`) AS 'count' FROM `groups`t, `students`tn WHERE t.`id_kurse`=6 and t.`id_ group`=tn.`id_ group`");
+                                while ($roww = $KyrsePanel2->fetch_assoc()) {
+                                    $numer = $roww["count"];
+                                }
 
-                        ?>
+                                ?>
                             for (let h = 0; h < 5; h++) {
                                 let elemp = document.querySelector(".kursePanel");
                                 let div = document.createElement('div');
@@ -447,18 +201,13 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
                                 elemp.append(form);
                                 break;
                             }
-                        <?php
-                        }
-                        ?>
+                                        <?php
+                            }
+                            ?>
                     </script>
 
                 </div>
 
-
-                <!-- start: page -->
-
-
-                <!-- end: page -->
             </section>
         </div>
 
@@ -468,7 +217,9 @@ if ($_SESSION['user']['SuperAdmin'] != 0) {
     <script>
         const swup = new Swup();
     </script>
+    <!-- Vendor -->
 
+    <?php include 'component/scripts.php'; ?>
 </body>
 
 </html>
